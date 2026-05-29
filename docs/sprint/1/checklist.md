@@ -20,13 +20,13 @@
 > 먼저 `src/test/.../fixture/`에 fixture 함수(기본값 인자)를 깔고 시작한다([`test.md` §8](../../study/test.md)).
 > 산출물: enum(`CoupleStatus`(PENDING/CONNECTED), `Visibility`, `Category`) + 순수 도메인 객체(`Couple`, `Schedule`, 색상/비밀번호 규칙).
 
-- [ ] **1.1** `Couple.connect()`: `PENDING`→`CONNECTED`, `connected_at` 기록 / 이미 `CONNECTED`면 거절(불변식) **(T1, FR-2.3)**
-- [ ] **1.2** `Couple` 생성 불변식: `requester_id == target_id` 금지(자기 연결 금지) **(T1, FR-2.2)**
-- [ ] **1.3** PENDING 만료 판정: `created_at + 10분` 경계 — **미만=유효 / 정확히 10분·초과=만료** **(T2, FR-2.7)**
-- [ ] **1.4** 색상 매핑: `MINE`→본인 `personal_color`, `PARTNER`→파트너 `personal_color`, `COUPLE`→`couple_color`, 미설정 시 서버 기본색 **(T3, FR-7.4·7.1·7.2)**
-- [ ] **1.5** `Schedule` 시간 불변식: `end < start` 거절 / `end == start` 허용(경계) / 서로 다른 오프셋도 **UTC 절대시각 기준** 판정. 더불어 `visibility=COUPLE`이면 `couple_id` 필수 **(T4, FR-4.1·4.5·4.3)**
-- [ ] **1.6** 캘린더 `category` 판정 + 파트너 PRIVATE 제외: `owner==me`→`MINE`, `couple_id==내커플 && COUPLE`→`COUPLE`, `owner==파트너 && SHARED`→`PARTNER` / 파트너 `PRIVATE`는 어떤 category도 아님 → 제외 **(T5, FR-5.4·5.3)**
-- [ ] **1.7** 비밀번호 정책: **9자 이상 + 영문·숫자·특수문자 3종 모두**. 하나라도 빠지면 거절 **(T6, FR-1.10)**
+- [x] **1.1** `Couple.connect()`: `PENDING`→`CONNECTED`, `connected_at` 기록 / 이미 `CONNECTED`면 거절(불변식) **(T1, FR-2.3)**
+- [x] **1.2** `Couple` 생성 불변식: `requester_id == target_id` 금지(자기 연결 금지) **(T1, FR-2.2)**
+- [x] **1.3** PENDING 만료 판정: `created_at + 10분` 경계 — **미만=유효 / 정확히 10분·초과=만료** **(T2, FR-2.7)**
+- [x] **1.4** 색상 매핑: `MINE`→본인 `personal_color`, `PARTNER`→파트너 `personal_color`, `COUPLE`→`couple_color`, 미설정 시 서버 기본색 **(T3, FR-7.4·7.1·7.2)**
+- [x] **1.5** `Schedule` 시간 불변식: `end < start` 거절 / `end == start` 허용(경계) / 서로 다른 오프셋도 **UTC 절대시각 기준** 판정. 더불어 `visibility=COUPLE`이면 `couple_id` 필수 **(T4, FR-4.1·4.5·4.3)**
+- [x] **1.6** 캘린더 `category` 판정 + 파트너 PRIVATE 제외: `owner==me`→`MINE`, `couple_id==내커플 && COUPLE`→`COUPLE`, `owner==파트너 && SHARED`→`PARTNER` / 파트너 `PRIVATE`는 어떤 category도 아님 → 제외 **(T5, FR-5.4·5.3)**
+- [x] **1.7** 비밀번호 정책: **9자 이상 + 영문·숫자·특수문자 3종 모두**. 하나라도 빠지면 거절 **(T6, FR-1.10)**
 
 > ✅ 단계 완료 기준: 위 단위 테스트(T1~T6 묶음)가 Spring/DB 없이 green.
 
